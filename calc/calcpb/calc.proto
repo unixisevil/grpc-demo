@@ -1,0 +1,54 @@
+syntax= "proto3";
+
+package calc;
+
+option go_package = "calcpb";
+
+message  SumReq {
+	int32 first_num = 1;
+	int32 second_num = 2;
+}
+
+message  SumRes {
+	int32 res = 1;
+}
+
+message  PrimeFactorReq {
+	int64  number = 1;
+}
+
+message  PrimeFactorRes {
+	int64 primeFactor = 1;
+}
+
+message  AvgReq{
+	int64 number =1;
+}
+
+message  AvgRes{
+	double  avg  =1;
+}
+
+message MaxReq {
+	int64 number = 1;
+}
+
+message MaxRes {
+	int64 max  = 1;
+}
+
+message SqrtReq {
+	double number = 1;
+}
+
+message SqrtRes {
+	double root = 1;
+}
+
+service CalcService{
+	rpc  Sum(SumReq)  returns (SumRes) {};
+	rpc  PrimeFactor(PrimeFactorReq)  returns (stream PrimeFactorRes) {};
+	rpc  Avg(stream  AvgReq)  returns (AvgRes) {};
+	rpc  Max(stream  MaxReq)  returns (stream MaxRes) {};
+	rpc  Sqrt(SqrtReq)  returns (SqrtRes) {};
+}
